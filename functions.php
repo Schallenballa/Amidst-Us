@@ -1,13 +1,13 @@
 <?php
 $dbhost  = 'localhost';
 
-$dbname  = 'db00';   // Modify these...
-$dbuser  = 'user00';   // ...variables according
-$dbpass  = '008926';   // ...to your installation
+$dbname  = 'db40';   // Modify these...
+$dbuser  = 'user40';   // ...variables according
+$dbpass  = '40kurt';   // ...to your installation
 
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-if ($connection->connect_error) 
+if ($connection->connect_error)
     die("Fatal Error 1");
 
 function createTable($name, $query){
