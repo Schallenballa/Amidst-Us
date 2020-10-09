@@ -1,9 +1,9 @@
 <?php
 $dbhost  = 'localhost';
 
-$dbname  = 'db40';   // Modify these...
-$dbuser  = 'user40';   // ...variables according
-$dbpass  = '40kurt';   // ...to your installation
+$dbname  = 'db00';
+$dbuser  = 'user00';
+$dbpass  = '008926';
 
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -60,7 +60,18 @@ function showProfile($user) {
   }
   else {
     //echo "<p> No profile photo found. Contact Zach or Payton if you are having trouble :(</p>";
-    return "<p> No profile photo found. Contact Zach or Payton if you are having trouble :(</p>";
+    return "<p> No profile photo found for $user. Contact Zach or Payton if you are having trouble :(</p>";
+  }
+}
+
+function showOtherProfile($user) {
+  if (file_exists("userpics/$user.jpg")){
+      //echo "<img class='userpicSmall' src='userpics/$user.jpg'>";
+      return "<img class='userPicLeft' src='userpics/$user.jpg'>";
+  }
+  else {
+    //echo "<p> No profile photo found. Contact Zach or Payton if you are having trouble :(</p>";
+    return "<p> No profile photo found for $user. Contact Zach or Payton if you are having trouble :(</p>";
   }
 }
 ?>

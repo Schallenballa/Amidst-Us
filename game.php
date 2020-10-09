@@ -2,7 +2,7 @@
 require_once 'header.php';
 
 if (!$loggedin) {
-    echo "<h3>Log in to view page</h3>";
+    echo "<h3>You have been logged out :(</h3>";
     die(require 'footer.php');
 }
 
@@ -36,7 +36,7 @@ foreach($following as $friend){
 }
 echo "</div>";
 
-echo "<a class='button' href='game.php?view=$user'>Start Game</a>";
+echo "<a class='button' href='game.php'>Start Game</a>";
 echo "</body>";
 die(require 'footer.php');
 

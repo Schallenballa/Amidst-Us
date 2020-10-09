@@ -1,5 +1,26 @@
 <?php
  require_once 'header.php';
+ require_once 'functions.php';
+
+ $dbhost  = 'localhost';
+
+ $dbname  = 'db00';
+ $dbuser  = 'user00';
+ $dbpass  = '008926';
+ $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+ if ($connection->connect_error)
+     die("Fatal Error 1");
+
+function deleteUser(){
+  echo "<p>Deleting... $user</p>";
+ queryMysql("DELETE FROM members");
+  echo "<p>Deleted $user</p>";
+}
+
+if(array_key_exists('delete_user', $_POST)) {
+            deleteUser();
+        }
+
 
 if (!$loggedin) die("</div></body></html>");
 
@@ -72,7 +93,11 @@ echo <<<_END
         Image: <br>
         <input type='file' name='image' size='14'><br><br>
         <input type='submit' value='Save Profile'>
+        <input type='button' onclick='deleteUser()' value='Delete Account'>
     </form>
+    <script>
+
+    </script>
 _END;
 
 echo "<br><hr>";
@@ -81,3 +106,10 @@ echo showDetailedProfile($user);
 
 require_once 'footer.php';
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <form method="post">
+    <input type="submit" name="delete_user" value="DELETE ALL USERS" />
+  </form>
+</html>
