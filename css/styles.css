@@ -9,14 +9,14 @@ Playfair Display - Bodini
 */
 
 
-*{
-  font-family: "Tahoma";
+body{
+  font-family: "Comic Sans MS", cursive;
 }
 
 html {
     font-size: 16px;
     color: #222;
-    background-image: url("../img/background.png");
+    //background-image: url("../img/background.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -26,7 +26,7 @@ html {
 
 #wrapper {
     margin: auto;
-    max-width: 1000px;
+    //max-width: 1000px;
     border-color: #222;
     border-style: solid;
     border-width: 0 5px;
@@ -41,7 +41,6 @@ header {
 
 #logo {
     padding: 20px 0;
-    width: 350px;
     margin: 0 40px;
     font-variant: small-caps;
     letter-spacing: .05em;
@@ -60,7 +59,7 @@ nav {
 
 nav ul {
     list-style-type: none;
-    overflow: hidden;
+    overflow: visible;
     color: #ddd;
     background-color: #222;
     margin: 0;
@@ -70,11 +69,12 @@ nav ul {
 
 nav li {
     float: left;
+    overflow: visible;
 }
 
 nav li a {
     display: block;
-    color: white;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -106,8 +106,26 @@ nav li a:hover {
     object-fit: contain;
     background-color: #222;
     border: 2pt solid #222;
-    float: left;
+    //float: left;
     margin: 0 40px 20px 0px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.userpicSmall {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: contain;
+    background-color: #222;
+    border: 2pt solid #222;
+    //float: left;
+    margin: 0 40px 20px 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .right-align {
@@ -115,10 +133,7 @@ nav li a:hover {
 }
 
 #home {
-  float: left;
   font-weight: bold;
-  font-size: 2em;
-  padding-top: .45em;
 }
 
 textarea {
@@ -162,4 +177,62 @@ footer a {
 }
 .button:hover{
   background: #535d8c;
+}
+
+
+
+
+
+
+
+
+/* Style the navigation menu */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.logout {
+  color: #333;
+  background-color: #222;
+}
+
+.logout :hover {
+  color: white;
+  background-color: #000;
+}
+
+
+.centered {
+  text-align: center;
 }

@@ -17,7 +17,7 @@ if (isset($_POST['user'])) {
         else {
             $_SESSION['user'] = $user;
             $_SESSION['pass'] = $pass;
-            die("<h3>Welcome back, $user.</h3><p>Please <a href='members.php?view=$user'>click here</a> to continue.</p></div><footer></footer></body></html>");
+            die("<h3>Welcome back, $user.</h3><p>Please <a href='home.php?view=$user'>click here</a> to continue.</p></div><footer></footer></body></html>");
         }
     }
 }

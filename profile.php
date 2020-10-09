@@ -4,7 +4,7 @@
 if (!$loggedin) die("</div></body></html>");
 
 $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
-    
+
 if (isset($_POST['text'])) {
     $text = sanitizeString($_POST['text']);
     $text = preg_replace('/\s\s+/', ' ', $text);
@@ -12,7 +12,7 @@ if (isset($_POST['text'])) {
     if ($result->num_rows)
          queryMysql("UPDATE profiles SET text='$text' where user='$user'");
     else queryMysql("INSERT INTO profiles VALUES('$user', '$text')");
-} 
+}
 else {
     if ($result->num_rows) {
         $row  = $result->fetch_array(MYSQLI_ASSOC);
@@ -77,7 +77,7 @@ _END;
 
 echo "<br><hr>";
 echo "<h3>Your Current Profile</h3>";
-showProfile($user);
+echo showDetailedProfile($user);
 
 require_once 'footer.php';
 ?>

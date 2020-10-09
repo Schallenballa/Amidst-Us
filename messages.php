@@ -4,9 +4,9 @@ require_once 'header.php';
 if (!$loggedin)
     die("Log in for messages</div><footer></footer></body></html>");
 
-if (isset($_GET['view'])) 
+if (isset($_GET['view']))
     $view = sanitizeString($_GET['view']);
-else 
+else
     $view = $user;
 
 if (isset($_POST['text'])) {
@@ -20,10 +20,10 @@ if (isset($_POST['text'])) {
 }
 
 if ($view != "") {
-    if ($view == $user) 
+    if ($view == $user)
         $name1 = $name2 = "Your";
     else {
-        $name1 = "<a href='members.php?view=$view'>$view</a>'s";
+        $name1 = "<a href='home.php?view=$view'>$view</a>'s";
         $name2 = "$view's";
   }
 
