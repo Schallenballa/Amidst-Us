@@ -16,6 +16,13 @@ function createTable($name, $query){
     echo "Table '$name' created or already exists.<br>";
 }
 
+function getImp($name){
+  $result = queryMysql("SELECT imp FROM members WHERE user='$name'");
+  $row=$result->fetch_assoc();
+  $id=$row['imp'];
+  return $id;
+}
+
 function queryMysql($query) {
     global $connection;
     $result = $connection->query($query);

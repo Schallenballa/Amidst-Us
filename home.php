@@ -8,7 +8,8 @@ if (!$loggedin) {
 
 if(array_key_exists('imp_set', $_POST)) {
             imp_set();
-        }
+            echo "<p class='centerd animated_blur_out' style='color: #333; position: absolute;'>The Imposter has been set...</p>";
+}
 
 function imp_set(){
   queryMysql("UPDATE members SET imp = '0' WHERE 1=1");
@@ -26,6 +27,14 @@ $name = "$view";
 
 echo "<body>";
 echo "<h3 class='centered'>$name</h3>";
+
+if (getImp($view) == '1'){
+  echo "<p class='centered animated_pop_right' style='color: red;'>YOU ARE THE IMPOSTER!</p>";
+}
+else{
+  echo "<p class='centered animated_pop_right'>You are not an imposter</p>";
+}
+
 echo "<div style='display: block;'>";
 echo showProfile($view);
 echo  "</div>";
@@ -51,14 +60,17 @@ foreach($following as $friend){
 }
 echo "</div>";
 
+
 echo '
+
 <form method="post">
-        <input style="background-color: #fc2525;" type="submit" name="imp_set"
+        <input style="background-color: #fc2525; height: 50px; margin-top: 2em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="imp_set"
                 class="newButton" value="SET IMPOSTER" />
 
-        <input type="submit" name="button2"
+        <input type="submit" name="button2" style="height: 50px; display: block; margin-right: auto; margin-left: auto;"
                 class="newButton" value="Start Game" />
 </form>
+
 ';
 
 echo "</body>";
