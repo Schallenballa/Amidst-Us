@@ -55,7 +55,7 @@ echo <<<_LOGGEDIN
                 <a href="home.php?view=$user" class="active">Home</a>
               <!-- Navigation links (hidden by default) -->
               <div id="myLinks">
-                <a href="Home.php">Home</a>
+                <a href="home.php?view=$user">Home</a>
                 <a href="about.php">About</a>
                 <a href="profile.php">Profile</a>
                 <a class="logout" href="logout.php">Log Out</a>

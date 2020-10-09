@@ -11,6 +11,7 @@ if ($connection->connect_error)
     die("Fatal Error 1");
 
 function createTable($name, $query){
+    queryMysql("DROP TABLE $name");
     queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
     echo "Table '$name' created or already exists.<br>";
 }

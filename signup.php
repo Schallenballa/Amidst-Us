@@ -13,17 +13,18 @@ echo <<<_END
             $('#used').html(data)
         });
     }
-</script>  
+</script>
 _END;
 
 $error = $user = $pass = "";
-if (isset($_SESSION['user'])) 
+if (isset($_SESSION['user']))
     destroySession();
 
 if (isset($_POST['user'])) {
     $user = sanitizeString($_POST['user']);
     $pass = sanitizeString($_POST['pass']);
-    
+    $imp = sanitizeString($_POST['imp']);
+
     if ($user == "" || $pass == "")
         $error = 'Not all fields were entered<br><br>';
     else {
@@ -32,7 +33,7 @@ if (isset($_POST['user'])) {
         if ($result->num_rows)
             $error = 'That username already exists<br><br>';
         else {
-            queryMysql("INSERT INTO members VALUES('$user', '$pass')");
+            queryMysql("INSERT INTO members VALUES('$user', '$pass', '0')");
             die('<h4>Account created</h4>Please Log in.</div></body></html>');
         }
     }
@@ -53,6 +54,7 @@ echo <<<_END
         <div data-role='fieldcontain'>
             <label>Password</label>
             <input type='text' maxlength='16' name='pass' value='$pass'>
+            <input type="hidden" maxlength='1' name='imp' value='$imp'>
         </div>
         <div data-role='fieldcontain'>
             <label></label>

@@ -15,6 +15,7 @@ require_once 'functions.php';
 createTable('members',
             'user VARCHAR(16),
             pass VARCHAR(16),
+            imp VARCHAR(1),
             INDEX(user(6))');
 
 createTable('messages',

@@ -6,6 +6,21 @@ if (!$loggedin) {
     die(require 'footer.php');
 }
 
+if(array_key_exists('imp_set', $_POST)) {
+            imp_set();
+        }
+
+function imp_set(){
+  queryMysql("UPDATE members SET imp = '0' WHERE 1=1");
+  queryMysql("
+  UPDATE members
+  SET imp = '1'
+  WHERE 1=1
+  ORDER BY RAND()
+  LIMIT 1;
+  ");
+}
+
 $view = sanitizeString($_GET['view']);
 $name = "$view";
 
@@ -36,7 +51,16 @@ foreach($following as $friend){
 }
 echo "</div>";
 
-echo "<a class='button' href='game.php?view=$user'>Start Game</a>";
+echo '
+<form method="post">
+        <input style="background-color: #fc2525;" type="submit" name="imp_set"
+                class="newButton" value="SET IMPOSTER" />
+
+        <input type="submit" name="button2"
+                class="newButton" value="Start Game" />
+</form>
+';
+
 echo "</body>";
 die(require 'footer.php');
 

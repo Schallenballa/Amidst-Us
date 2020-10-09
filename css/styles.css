@@ -173,13 +173,14 @@ footer a {
   float: right;
 }
 
-.button{
+.newButton{
   display: block;
     width: 250px;
     height: 25px;
     background: #8a9be9;
     text-decoration: none;
     padding: 10px;
+    margin-bottom: 20px;
     text-align: center;
     border-radius: 5px;
     color: white;
@@ -189,6 +190,7 @@ footer a {
 .button:hover{
   background: #535d8c;
 }
+
 
 
 
