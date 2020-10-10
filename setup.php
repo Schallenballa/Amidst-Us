@@ -16,6 +16,9 @@ createTable('members',
             'user VARCHAR(16),
             pass VARCHAR(16),
             imp VARCHAR(1),
+            task1 VARCHAR(1),
+            task2 VARCHAR(1),
+            task3 VARCHAR(1),
             INDEX(user(6))');
 
 createTable('messages',
@@ -38,6 +41,11 @@ createTable('profiles',
             'user VARCHAR(16),
             text VARCHAR(4096),
             INDEX(user(6))');
+
+createTable('tasks',
+            'name VARCHAR(60),
+            id VARCHAR(2),
+            INDEX(name(6))');
 ?>
 
     <p>The database is ready to go.</p>

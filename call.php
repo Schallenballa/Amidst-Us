@@ -10,44 +10,27 @@ $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
     die("Fatal Error 1");
 
+
+$stmt = $connection->query('SELECT * FROM members WHERE 1=1');
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+$tag_name = $row['name'];
+$client_id = $row['imp'];
+}
+echo json_encode(array($tag_name,$client_id));
+
+
+
+/*
 function createTable($name, $query){
     queryMysql("DROP TABLE $name");
     queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
     echo "Table '$name' created or already exists.<br>";
 }
 
-function getRows(){
-  $result = queryMysql("SELECT COUNT(*) FROM tasks");
-  $row=$result->fetch_assoc();
-  $id=$row['COUNT(*)'];
-  return $id;
-}
-
 function getImp($name){
   $result = queryMysql("SELECT imp FROM members WHERE user='$name'");
   $row=$result->fetch_assoc();
   $id=$row['imp'];
-  return $id;
-}
-
-function getTask1($name){
-  $result = queryMysql("SELECT task1 FROM members WHERE user='$name'");
-  $row=$result->fetch_assoc();
-  $id=$row['task1'];
-  return $id;
-}
-
-function getTask2($name){
-  $result = queryMysql("SELECT task2 FROM members WHERE user='$name'");
-  $row=$result->fetch_assoc();
-  $id=$row['task2'];
-  return $id;
-}
-
-function getTask3($name){
-  $result = queryMysql("SELECT task3 FROM members WHERE user='$name'");
-  $row=$result->fetch_assoc();
-  $id=$row['task3'];
   return $id;
 }
 
@@ -110,4 +93,5 @@ function showOtherProfile($user) {
     return "<p> No profile photo found for $user. Contact Zach or Payton if you are having trouble :(</p>";
   }
 }
+*/
 ?>

@@ -2,7 +2,13 @@
 session_start();
 
 $clubstr = 'Amidst Us';
-$userstr = 'Please Log In';
+if (isset($_SESSION['user'])) {
+  $userstr = $_SESSION['user'];
+}
+else{
+  $userstr = 'Please Log In';
+}
+
 
 echo <<<_INIT
 <!DOCTYPE html>

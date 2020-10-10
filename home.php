@@ -12,6 +12,8 @@ if(array_key_exists('imp_set', $_POST)) {
 }
 
 function imp_set(){
+  $view = sanitizeString($_GET['view']);
+  $name = "$view";
   queryMysql("UPDATE members SET imp = '0' WHERE 1=1");
   queryMysql("
   UPDATE members
@@ -20,6 +22,66 @@ function imp_set(){
   ORDER BY RAND()
   LIMIT 1;
   ");
+  queryMysql("UPDATE members SET task1 = '0' WHERE 1=1");
+  queryMysql("UPDATE members SET task2 = '0' WHERE 1=1");
+  queryMysql("UPDATE members SET task3 = '0' WHERE 1=1");
+  queryMysql("
+  UPDATE members
+  SET task1 = (RAND()*(3-1)+1)
+  WHERE 1=1;
+  ");
+  queryMysql("
+  UPDATE members
+  SET task2 = (RAND()*(3-1)+1)
+  WHERE 1=1;
+  ");
+  queryMysql("
+  UPDATE members
+  SET task3 = (RAND()*(3-1)+1)
+  WHERE 1=1;
+  ");
+  //The following code makes sure no one has duplicate tasks
+  $result = queryMysql("SELECT * FROM members WHERE 1=1");
+  $following = array();
+  $num    = $result->num_rows;
+  for ($j = 0 ; $j < $num ; ++$j) {
+      $row           = $result->fetch_array(MYSQLI_ASSOC);
+      $following[$j] = $row['user'];
+  }
+  foreach($following as $friend){
+    $name = "$friend";
+    $rowCount = getRows();
+
+    while ((getTask1($name) == getTask2($name)) || (getTask2($name) == getTask3($name)) || (getTask3($name) == getTask1($name))){
+      //echo "<p>setting the tasks for $name</p>";
+      //echo "<p>row count = $rowCount</p>";
+      while (getTask1($name) == getTask2($name)){
+        queryMysql("
+        UPDATE members
+        SET task1 = (RAND()*('$rowCount'-1)+1)
+        WHERE user='$name';
+        ");
+      }
+      while (getTask2($name) == getTask3($name)){
+        queryMysql("
+        UPDATE members
+        SET task2 = (RAND()*('$rowCount'-1)+1)
+        WHERE user='$name';
+        ");
+      }
+      while (getTask3($name) == getTask1($name)){
+        queryMysql("
+        UPDATE members
+        SET task3 = (RAND()*('$rowCount'-1)+1)
+        WHERE user='$name';
+        ");
+      }
+    }
+  }
+
+
+
+
 }
 
 $view = sanitizeString($_GET['view']);
@@ -59,19 +121,18 @@ foreach($following as $friend){
   echo "</div>";
 }
 echo "</div>";
-
-
 echo '
+
 
 <form method="post">
         <input style="background-color: #fc2525; height: 50px; margin-top: 2em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="imp_set"
-                class="newButton" value="SET IMPOSTER" />
-
-        <input type="submit" name="button2" style="height: 50px; display: block; margin-right: auto; margin-left: auto;"
-                class="newButton" value="Start Game" />
+                class="newButton" value="SET IMPOSTER & TASKS" />
 </form>
 
 ';
+
+echo "<a class='newButton' style='margin-top: 2em; display: block; margin-right: auto; margin-left: auto;' href='game.php?view=$user'>Join Lobby</a>";
+
 
 echo "</body>";
 die(require 'footer.php');
