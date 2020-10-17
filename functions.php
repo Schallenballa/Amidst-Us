@@ -11,9 +11,11 @@ if ($connection->connect_error)
     die("Fatal Error 1");
 
 function createTable($name, $query){
+  if ($name != 'tasks'){
     queryMysql("DROP TABLE $name");
-    queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
-    echo "Table '$name' created or already exists.<br>";
+  }
+  queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
+  echo "Table '$name' created or already exists.<br>";
 }
 
 function getRows(){

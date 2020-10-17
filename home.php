@@ -25,21 +25,26 @@ function imp_set(){
   queryMysql("UPDATE members SET task1 = '0' WHERE 1=1");
   queryMysql("UPDATE members SET task2 = '0' WHERE 1=1");
   queryMysql("UPDATE members SET task3 = '0' WHERE 1=1");
+  queryMysql("UPDATE members SET task1Complete = '0' WHERE 1=1");
+  queryMysql("UPDATE members SET task2Complete = '0' WHERE 1=1");
+  queryMysql("UPDATE members SET task3Complete = '0' WHERE 1=1");
+  $rowCount = getRows();
   queryMysql("
   UPDATE members
-  SET task1 = (RAND()*(3-1)+1)
+  SET task1 = (RAND()*('$rowCount'-1)+1)
   WHERE 1=1;
   ");
   queryMysql("
   UPDATE members
-  SET task2 = (RAND()*(3-1)+1)
+  SET task2 = (RAND()*('$rowCount'-1)+1)
   WHERE 1=1;
   ");
   queryMysql("
   UPDATE members
-  SET task3 = (RAND()*(3-1)+1)
+  SET task3 = (RAND()*('$rowCount'-1)+1)
   WHERE 1=1;
   ");
+
   //The following code makes sure no one has duplicate tasks
   $result = queryMysql("SELECT * FROM members WHERE 1=1");
   $following = array();
@@ -50,7 +55,6 @@ function imp_set(){
   }
   foreach($following as $friend){
     $name = "$friend";
-    $rowCount = getRows();
 
     while ((getTask1($name) == getTask2($name)) || (getTask2($name) == getTask3($name)) || (getTask3($name) == getTask1($name))){
       //echo "<p>setting the tasks for $name</p>";

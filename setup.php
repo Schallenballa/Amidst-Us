@@ -19,6 +19,9 @@ createTable('members',
             task1 VARCHAR(1),
             task2 VARCHAR(1),
             task3 VARCHAR(1),
+            task1Complete VARCHAR(1),
+            task2Complete VARCHAR(1),
+            task3Complete VARCHAR(1),
             INDEX(user(6))');
 
 createTable('messages',

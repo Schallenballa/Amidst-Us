@@ -26,11 +26,82 @@ _INIT;
 
 require_once 'functions.php';
 
-function getTask(){
-  $result = queryMysql("SELECT name FROM tasks ORDER BY RAND() LIMIT 1;");
+function completeTask1($name){
+  queryMysql("UPDATE members SET task1Complete = '1' WHERE user='$name'");
+}
+
+function completeTask2($name){
+  queryMysql("UPDATE members SET task2Complete = '1' WHERE user='$name'");
+}
+
+function completeTask3($name){
+  queryMysql("UPDATE members SET task3Complete = '1' WHERE user='$name'");
+}
+
+function task1Done($name){
+  $result = queryMysql("SELECT task1Complete FROM members WHERE user='$name'");
   $row=$result->fetch_assoc();
-  $id=$row['name'];
-  return $id;
+  $id=$row['task1Complete'];
+  if ($id == 1){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function task2Done($name){
+  $result = queryMysql("SELECT task2Complete FROM members WHERE user='$name'");
+  $row=$result->fetch_assoc();
+  $id=$row['task2Complete'];
+  if ($id == 1){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function task3Done($name){
+  $result = queryMysql("SELECT task3Complete FROM members WHERE user='$name'");
+  $row=$result->fetch_assoc();
+  $id=$row['task3Complete'];
+  if ($id == 1){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function getTask1Name($name){
+  $taskID = queryMysql("SELECT task1 FROM members WHERE user='$name'");
+  $row1=$taskID->fetch_assoc();
+  $id1=$row1['task1'];
+  $result = queryMysql("SELECT name FROM tasks WHERE id='$id1'");
+  $row2=$result->fetch_assoc();
+  $id2=$row2['name'];
+  return $id2;
+}
+
+function getTask2Name($name){
+  $taskID = queryMysql("SELECT task2 FROM members WHERE user='$name'");
+  $row1=$taskID->fetch_assoc();
+  $id1=$row1['task2'];
+  $result = queryMysql("SELECT name FROM tasks WHERE id='$id1'");
+  $row2=$result->fetch_assoc();
+  $id2=$row2['name'];
+  return $id2;
+}
+
+function getTask3Name($name){
+  $taskID = queryMysql("SELECT task3 FROM members WHERE user='$name'");
+  $row1=$taskID->fetch_assoc();
+  $id1=$row1['task3'];
+  $result = queryMysql("SELECT name FROM tasks WHERE id='$id1'");
+  $row2=$result->fetch_assoc();
+  $id2=$row2['name'];
+  return $id2;
 }
 
 if (isset($_SESSION['user'])) {
