@@ -29,6 +29,7 @@ function imp_set(){
   queryMysql("UPDATE members SET task2Complete = '0' WHERE 1=1");
   queryMysql("UPDATE members SET task3Complete = '0' WHERE 1=1");
   $rowCount = getRows();
+  $rowMemberCount = getMemberRows();
   queryMysql("
   UPDATE members
   SET task1 = (RAND()*('$rowCount'-1)+1)
@@ -44,6 +45,17 @@ function imp_set(){
   SET task3 = (RAND()*('$rowCount'-1)+1)
   WHERE 1=1;
   ");
+  queryMysql("
+  UPDATE score
+  SET score = '0'
+  WHERE name ='SCORE';
+  ");
+  queryMysql("
+  UPDATE score
+  SET numPlayers = '$rowMemberCount'
+  WHERE name ='SCORE';
+  ");
+
 
   //The following code makes sure no one has duplicate tasks
   $result = queryMysql("SELECT * FROM members WHERE 1=1");

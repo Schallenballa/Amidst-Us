@@ -49,6 +49,14 @@ createTable('tasks',
             'name VARCHAR(60),
             id VARCHAR(2),
             INDEX(name(6))');
+
+createTable('score',
+            'name VARCHAR(60),
+            score INT(3),
+            numPlayers INT(2),
+            INDEX(name(6))');
+
+queryMysql("INSERT INTO score VALUES('SCORE', 0, 0)");
 ?>
 
     <p>The database is ready to go.</p>

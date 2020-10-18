@@ -26,6 +26,21 @@ _INIT;
 
 require_once 'functions.php';
 
+function getPFull(){
+  return (getMemberRows() * 3);
+}
+
+function getPCurrent(){
+  $result = queryMysql("SELECT score FROM score WHERE name='SCORE'");
+  $row=$result->fetch_assoc();
+  $id=$row['score'];
+  return $id;
+}
+
+function incrementScore(){
+  queryMysql("UPDATE score SET score = score+1 WHERE name='SCORE'");
+}
+
 function completeTask1($name){
   queryMysql("UPDATE members SET task1Complete = '1' WHERE user='$name'");
 }

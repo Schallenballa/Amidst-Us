@@ -22,54 +22,73 @@
   <?php
     if(array_key_exists('c_t_1', $_POST)) {
       completeTask1($user);
+      incrementScore();
     }
 
     if(array_key_exists('c_t_2', $_POST)) {
       completeTask2($user);
+      incrementScore();
     }
 
     if(array_key_exists('c_t_3', $_POST)) {
       completeTask3($user);
+      incrementScore();
     }
 
     if (!task1Done($user)){
-      echo'
-        <div id="task1" class="task"></div>
-        <form method="post">
-          <input style="background-color: #357564; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="c_t_1"
-                  class="newButton" value="Complete Task 1" />
-        </form>
-      ';
+        echo '<div id="task1" class="task"></div>';
+        if (!getImp($user)){
+          echo'
+            <form method="post">
+              <input style="background-color: #357564; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="c_t_1"
+                      class="newButton" value="Complete Task 1" />
+            </form>
+          ';
+        }
     }
     else {
       echo '<div id="task1" class="task" hidden></div>';
     }
 
     if (!task2Done($user)){
-      echo'
-        <div id="task2" class="task"></div>
-        <form method="post">
-          <input style="background-color: #357564; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="c_t_2"
-                  class="newButton" value="Complete Task 2" />
-        </form>
-      ';
+      echo '<div id="task2" class="task"></div>';
+      if (!getImp($user)){
+        echo'
+          <form method="post">
+            <input style="background-color: #357564; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="c_t_2"
+                    class="newButton" value="Complete Task 2" />
+          </form>
+        ';
+      }
     }
     else {
       echo '<div id="task2" class="task" hidden></div>';
     }
 
     if (!task3Done($user)){
-      echo'
-        <div id="task3" class="task"></div>
-        <form method="post">
-          <input style="background-color: #357564; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="c_t_3"
-                  class="newButton" value="Complete Task 3" />
-        </form>
-      ';
+      echo '<div id="task3" class="task"></div>';
+      if (!getImp($user)){
+        echo'
+
+          <form method="post">
+            <input style="background-color: #357564; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="c_t_3"
+                    class="newButton" value="Complete Task 3" />
+          </form>
+        ';
+      }
     }
     else {
       echo '<div id="task3" class="task" hidden></div>';
     }
+    echo '
+      <hr style="padding-top: 1em;">
+      <form method="post">
+        <input style="background-color: #DA4423; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="report"
+                class="newButton" value="REPORT BODY" />
+        <input style="background-color: #328BEA; height: 50px; margin-top: 1em; display: block; margin-right: auto; margin-left: auto;" type="submit" name="meeting"
+                class="newButton" value="CALL MEETING" />
+      </form>
+    ';
   ?>
 
 
@@ -77,6 +96,8 @@
   <?php $task1= getTask1Name($user); ?>
   <?php $task2= getTask2Name($user); ?>
   <?php $task3= getTask3Name($user); ?>
+  <?php $pFull= getPFull(); ?>
+  <?php $pCurrent= getPCurrent(); ?>
 </body>
 
 
@@ -89,6 +110,8 @@
   var task1 = "<?php echo $task1 ?>";
   var task2 = "<?php echo $task2 ?>";
   var task3 = "<?php echo $task3 ?>";
+  var progressFull = "<?php echo $pFull ?>";
+  var progressCurrent = "<?php echo $pCurrent ?>";
 
   document.getElementById("name").innerHTML = ("My name is: " + name);
   document.getElementById("task1").innerHTML = ("Task 1: " + task1);
@@ -96,12 +119,13 @@
   document.getElementById("task3").innerHTML = ("Task 3: " + task3);
 
   const progressBarFull = document.getElementById('progressBarFull');
-  let taskCount = 1;
-  const MAX_TASKS = 10;
+  let taskCount = progressCurrent;
+  const MAX_TASKS = (progressFull - 3);
   progressBarFull.style.width = `${(taskCount / MAX_TASKS) * 100}%`;
 </script>
 
 <style>
+
   .task{
     padding-top: 1em;
     padding-bottom: 1em;

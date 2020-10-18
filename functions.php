@@ -25,6 +25,13 @@ function getRows(){
   return $id;
 }
 
+function getMemberRows(){
+  $result = queryMysql("SELECT COUNT(*) FROM members");
+  $row=$result->fetch_assoc();
+  $id=$row['COUNT(*)'];
+  return $id;
+}
+
 function getImp($name){
   $result = queryMysql("SELECT imp FROM members WHERE user='$name'");
   $row=$result->fetch_assoc();
