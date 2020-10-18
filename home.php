@@ -147,7 +147,7 @@ echo '
 
 ';
 
-echo "<a class='newButton' style='margin-top: 2em; display: block; margin-right: auto; margin-left: auto;' href='game.php?view=$user'>Join Lobby</a>";
+echo "<a class='newButton' style='margin-top: 2em; display: block; margin-right: auto; margin-left: auto;' href='gameOverview.php?view=$user'>Join Lobby</a>";
 
 
 echo "</body>";

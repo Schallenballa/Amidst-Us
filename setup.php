@@ -57,6 +57,10 @@ createTable('score',
             INDEX(name(6))');
 
 queryMysql("INSERT INTO score VALUES('SCORE', 0, 0)");
+queryMysql("INSERT INTO tasks VALUES('this is the first task', '1')");
+queryMysql("INSERT INTO tasks VALUES('this is the second task', '2')");
+queryMysql("INSERT INTO tasks VALUES('this is the third task', '3')");
+queryMysql("INSERT INTO tasks VALUES('this is the fourth task', '4')");
 ?>
 
     <p>The database is ready to go.</p>
